@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>Pépite</title>
+  <meta name="description" content="Ton petit compagnon de sport">
+  <meta name="theme-color" content="#ffd6e7">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Pépite">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Nunito:wght@500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <!-- ======= ONBOARDING ======= -->
+    <section id="onboarding" class="screen hidden">
+      <div class="ob-card">
+        <div id="ob-egg" class="ob-egg"></div>
+        <h1>Un œuf t'attend&nbsp;!</h1>
+        <p class="muted">Il éclora avec ta première séance de sport. Ensuite, il grandira avec toi 💪</p>
+        <label>Ton prénom
+          <input id="ob-prenom" type="text" maxlength="20" placeholder="Ex : Léa" autocomplete="off">
+        </label>
+        <label>Le nom de ton compagnon
+          <input id="ob-petname" type="text" maxlength="16" placeholder="Ex : Pépite" autocomplete="off">
+        </label>
+        <div class="label">Sa couleur</div>
+        <div id="ob-colors" class="colors"></div>
+        <button id="ob-go" class="btn primary big">C'est parti ✨</button>
+      </div>
+    </section>
+
+    <!-- ======= HEADER ======= -->
+    <header id="topbar" class="hidden">
+      <div>
+        <div id="hdr-name" class="hdr-name"></div>
+        <div id="hdr-stage" class="hdr-stage"></div>
+      </div>
+      <button id="btn-settings" class="icon-btn" aria-label="Réglages">⚙️</button>
+    </header>
+
+    <main id="main" class="hidden">
+      <!-- ======= MAISON ======= -->
+      <section id="tab-home" class="tab">
+        <div class="stage-wrap">
+          <div id="bubble" class="bubble"></div>
+          <div id="pet" class="pet" aria-label="Ton compagnon (touche-le !)"></div>
+          <div id="fx" class="fx"></div>
+          <div class="ground"></div>
+        </div>
+
+        <div class="xp">
+          <div class="xp-row"><span id="xp-label"></span><span id="xp-next" class="muted"></span></div>
+          <div class="bar xpbar"><i id="xp-fill"></i></div>
+        </div>
+
+        <div class="stats">
+          <div class="stat"><span>💪 Forme</span><div class="bar"><i id="st-forme"></i></div></div>
+          <div class="stat"><span>💖 Joie</span><div class="bar"><i id="st-joie"></i></div></div>
+          <div class="stat"><span>⚡ Énergie</span><div class="bar"><i id="st-energie"></i></div></div>
+          <div class="stat"><span>💧 Eau</span><div class="bar"><i id="st-eau"></i></div></div>
+        </div>
+
+        <div class="actions">
+          <button class="act" id="act-sport"><b>🏃‍♀️</b>Séance</button>
+          <button class="act" id="act-water"><b>💧</b>Un verre</button>
+          <button class="act" id="act-snack"><b>🍓</b>Goûter</button>
+          <button class="act" id="act-sleep"><b>😴</b>Dodo</button>
+        </div>
+        <div id="streak" class="streak"></div>
+      </section>
+
+      <!-- ======= SEANCE ======= -->
+      <section id="tab-sport" class="tab hidden">
+        <h2>Nouvelle séance</h2>
+        <div id="sport-types" class="types"></div>
+        <div class="grid2">
+          <label>Durée (min)
+            <input id="f-duree" type="number" inputmode="numeric" min="1" max="600" placeholder="30">
+          </label>
+          <label><span id="f-dist-label">Distance (km)</span>
+            <input id="f-dist" type="number" inputmode="decimal" min="0" step="0.1" placeholder="optionnel">
+          </label>
+        </div>
+        <div class="label">Comment tu t'es sentie ?</div>
+        <div id="feelings" class="feelings"></div>
+        <label>Un petit mot (optionnel)
+          <input id="f-note" type="text" maxlength="120" placeholder="Ex : j'ai couru sans m'arrêter !">
+        </label>
+        <button id="f-save" class="btn primary big">Valider la séance 🎉</button>
+      </section>
+
+      <!-- ======= CHAT ======= -->
+      <section id="tab-chat" class="tab hidden">
+        <div id="chat-log" class="chat-log"></div>
+        <div id="chat-sugg" class="chat-sugg"></div>
+        <form id="chat-form" class="chat-form">
+          <input id="chat-input" type="text" placeholder="Écris-lui un message…" autocomplete="off" maxlength="500">
+          <button class="btn primary" type="submit" aria-label="Envoyer">➤</button>
+        </form>
+      </section>
+
+      <!-- ======= JOURNAL ======= -->
+      <section id="tab-journal" class="tab hidden">
+        <div id="totals" class="totals"></div>
+        <h2>Badges</h2>
+        <div id="badges" class="badges"></div>
+        <h2>Mes séances</h2>
+        <div id="history" class="history"></div>
+      </section>
+    </main>
+
+    <nav id="tabbar" class="hidden">
+      <button data-tab="home" class="on"><b>🏠</b>Maison</button>
+      <button data-tab="sport"><b>➕</b>Séance</button>
+      <button data-tab="chat"><b>💬</b>Parler</button>
+      <button data-tab="journal"><b>📒</b>Journal</button>
+    </nav>
+  </div>
+
+  <!-- ======= REGLAGES ======= -->
+  <dialog id="settings">
+    <form method="dialog" class="sheet">
+      <h2>Réglages</h2>
+      <label>Clé API Groq
+        <input id="s-key" type="password" placeholder="gsk_…" autocomplete="off">
+      </label>
+      <p class="muted small">Elle reste uniquement sur ce téléphone. Sans clé, ton compagnon parle quand même, mais avec des phrases toutes prêtes.</p>
+      <label>Modèle IA
+        <input id="s-model" type="text" placeholder="qwen/qwen3.8-27b">
+      </label>
+      <label>Ton prénom <input id="s-prenom" type="text" maxlength="20"></label>
+      <label>Nom du compagnon <input id="s-petname" type="text" maxlength="16"></label>
+      <div class="label">Couleur</div>
+      <div id="s-colors" class="colors"></div>
+      <div class="row">
+        <button type="button" id="s-test" class="btn">Tester l'IA</button>
+        <button type="button" id="s-export" class="btn">Sauvegarder</button>
+        <label class="btn filebtn">Restaurer<input id="s-import" type="file" accept="application/json" hidden></label>
+      </div>
+      <p id="s-msg" class="small"></p>
+      <div class="row">
+        <button type="button" id="s-reset" class="btn danger">Tout recommencer</button>
+        <button id="s-close" class="btn primary" value="save">Enregistrer</button>
+      </div>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
